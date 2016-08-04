@@ -1,0 +1,24 @@
+{
+  "name": "Parity",
+  "version": "0.0.1",
+  "main": "release/index.js",
+  "jsnext:main": "src/index.js",
+  "author": "Ethcore Team <admin@ethcore.io>",
+  "maintainers": [
+    "Jaco Greeff <jaco@ethcore.io>"
+  ],
+  "contributors": [],
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethcore/parity.js.git"
+  },
+  "keywords": [
+    "Ethereum",
+    "Parity"
+  ],
+  "scripts": {
+    "test": "mocha '**/src/**/*.spec.js'",
+    "watch": "npm run test -- -w"
+  }
+}
