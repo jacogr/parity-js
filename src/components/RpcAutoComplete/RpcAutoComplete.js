@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import AutoComplete from 'material-ui/AutoComplete';
-import rpcMethods from 'ethereum-jsonrpc';
+import rpcMethods from '../../ethereum-jsonrpc/';
 const rpcMethodsNames = Object.keys(rpcMethods).map(moduleName => {
   return Object.keys(rpcMethods[moduleName]).map(methodName => {
     return `${moduleName}_${methodName}`;

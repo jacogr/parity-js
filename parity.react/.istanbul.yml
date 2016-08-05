@@ -1,4 +1,0 @@
-instrumentation:
-  root: client
-  extensions:
-    - .js

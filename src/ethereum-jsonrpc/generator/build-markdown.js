@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-import interfaces from '../src';
+import interfaces from '../';
 
-const MARKDOWN = path.join(__dirname, '../release/interfaces.md');
+const MARKDOWN = path.join(__dirname, '../../release/interfaces.md');
 
 let preamble = '# interfaces\n';
 let markdown = '';

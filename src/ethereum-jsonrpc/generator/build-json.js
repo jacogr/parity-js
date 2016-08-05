@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-import interfaces from '../src';
+import interfaces from '../';
 
-const INDEX_JSON = path.join(__dirname, '../release/index.json');
+const INDEX_JSON = path.join(__dirname, '../../release/index.json');
 const methods = [];
 
 function formatDescription (obj) {

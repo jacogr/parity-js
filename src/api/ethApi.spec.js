@@ -2,7 +2,7 @@ import { TEST_HTTP_URL, endpointTest } from '../../test/mockRpc';
 
 import EthApi from './ethApi';
 
-import ethereumRpc from 'ethereum-jsonrpc';
+import ethereumRpc from '../ethereum-jsonrpc/';
 
 describe('api/EthApi', () => {
   describe('constructor', () => {
