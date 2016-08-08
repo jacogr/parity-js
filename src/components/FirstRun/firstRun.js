@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react';
 
 import { Dialog, FlatButton } from 'material-ui';
 
+import Completed from './Completed';
 import CreateAccount from './CreateAccount';
+import RecoverAccount from './RecoverAccount';
 import Welcome from './Welcome';
 
 const STAGE_NAMES = ['hello', 'new account', 'account created', 'setup completed'];
@@ -14,6 +16,7 @@ export default class FirstRun extends Component {
   }
 
   state = {
+    open: true,
     stage: 0
   }
 
@@ -22,19 +25,19 @@ export default class FirstRun extends Component {
       return null;
     }
 
-    const title = STAGE_NAMES[this.state.stage];
-
     return (
       <Dialog
-        title={ title }
+        title={ STAGE_NAMES[this.state.stage] }
         titleStyle={ TITLE_STYLE }
         actions={ this.renderDialogActions() }
         actionsContainerStyle={ TITLE_STYLE }
-        open
+        open={ this.state.open }
         autoScrollBodyContent
         onRequestClose={ this.onClose }>
         <Welcome visible={ this.state.stage === 0 } />
         <CreateAccount visible={ this.state.stage === 1 } />
+        <RecoverAccount visible={ this.state.stage === 2 } />
+        <Completed visible={ this.state.stage === 3 } />
       </Dialog>
     );
   }
@@ -47,15 +50,22 @@ export default class FirstRun extends Component {
           <FlatButton
             label='Next'
             primary
-            onTouchTap={ this.onNextStage } />
+            onTouchTap={ this.onBtnNext } />
         );
       case 1:
         return (
           <FlatButton
             label='Create'
             primary
-            onTouchTap={ this.onNextStage } />
+            onTouchTap={ this.onBtnNext } />
         );
+      case 3:
+        return (
+          <FlatButton
+            label='Close'
+            primary
+            onTouchTap={ this.onBtnClose } />
+      );
     }
   }
 
@@ -78,7 +88,13 @@ export default class FirstRun extends Component {
 
   }
 
-  onNextStage = () => {
+  onBtnClose = () => {
+    this.setState({
+      open: false
+    });
+  }
+
+  onBtnNext = () => {
     this.setState({
       stage: this.state.stage + 1
     });
