@@ -1,24 +1,24 @@
 import { TEST_HTTP_URL, endpointTest } from '../../test/mockRpc';
 
-import EthApi from './ethApi';
+import Api from './api';
 
 import ethereumRpc from '../ethereum-jsonrpc/';
 
-describe('api/EthApi', () => {
+describe('api/Api', () => {
   describe('constructor', () => {
     it('requires defined/non-null transport object', () => {
-      expect(() => new EthApi()).to.throw(/EthApi needs transport/);
-      expect(() => new EthApi(null)).to.throw(/EthApi needs transport/);
+      expect(() => new Api()).to.throw(/Api needs transport/);
+      expect(() => new Api(null)).to.throw(/Api needs transport/);
     });
 
     it('requires an execute function on the transport object', () => {
-      expect(() => new EthApi({})).to.throw(/EthApi needs transport/);
-      expect(() => new EthApi({ execute: true })).to.throw(/EthApi needs transport/);
+      expect(() => new Api({})).to.throw(/Api needs transport/);
+      expect(() => new Api({ execute: true })).to.throw(/Api needs transport/);
     });
   });
 
   describe('interface', () => {
-    const api = new EthApi(new EthApi.Transport.Http(TEST_HTTP_URL));
+    const api = new Api(new Api.Transport.Http(TEST_HTTP_URL));
 
     Object.keys(ethereumRpc).sort().forEach((endpoint) => {
       describe(endpoint, () => {

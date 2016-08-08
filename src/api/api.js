@@ -5,7 +5,7 @@ import { Db, Eth, Ethcore, Net, Personal, Shh, Trace, Web3 } from './rpc/index';
 import format from './format/index';
 import { isFunction } from './util/types';
 
-export default class EthApi {
+export default class Api {
   constructor (transport) {
     if (!transport || !isFunction(transport.execute)) {
       throw new Error('EthApi needs transport with execute() function defined');

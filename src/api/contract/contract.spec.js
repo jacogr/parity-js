@@ -2,14 +2,14 @@ import BigNumber from 'bignumber.js';
 
 import { TEST_HTTP_URL, mockHttp } from '../../../test/mockRpc';
 
-import EthAbi from '../../abi/ethAbi';
+import Abi from '../../abi';
 
-import EthApi from '../ethApi';
+import Api from '../api';
 import Contract from './contract';
 import { isInstanceOf, isFunction } from '../util/types';
 
-const transport = new EthApi.Transport.Http(TEST_HTTP_URL);
-const eth = new EthApi(transport);
+const transport = new Api.Transport.Http(TEST_HTTP_URL);
+const eth = new Api(transport);
 
 describe('api/contract/Contract', () => {
   const ADDR = '0x0123456789';
@@ -48,7 +48,7 @@ describe('api/contract/Contract', () => {
       it('sets EthApi & parsed interface', () => {
         expect(contract.address).to.not.be.ok;
         expect(contract.eth).to.deep.equal(eth);
-        expect(isInstanceOf(contract.abi, EthAbi)).to.be.ok;
+        expect(isInstanceOf(contract.abi, Abi)).to.be.ok;
       });
 
       it('attaches functions', () => {

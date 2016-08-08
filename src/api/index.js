@@ -1,1 +1,1 @@
-export default from './ethApi';
+export default from './api';

@@ -1,17 +1,17 @@
-import EthAbi from '../../abi/ethAbi';
-import EthApi from '../ethApi';
+import Abi from '../../abi';
+import Api from '../api';
 import { isInstanceOf } from '../util/types';
 
 export default class Contract {
   constructor (eth, abi) {
-    if (!isInstanceOf(eth, EthApi)) {
+    if (!isInstanceOf(eth, Api)) {
       throw new Error('EthApi needs to be provided to Contract instance');
     } else if (!abi) {
       throw new Error('Object ABI needs to be provided to Contract instance');
     }
 
     this._eth = eth;
-    this._abi = new EthAbi(abi);
+    this._abi = new Abi(abi);
 
     this._constructors = this._abi.constructors.map((cons) => this._bindFunction(cons));
     this._functions = this._abi.functions.map((func) => this._bindFunction(func));
