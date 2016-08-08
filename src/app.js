@@ -11,13 +11,19 @@ const muiTheme = getMuiTheme(darkBaseTheme);
 
 import resetStyle from './reset.css';
 
+import ApiProvider from './components/ApiProvider';
 import FirstRun from './components/FirstRun';
+
+const isFirst = true;
+const api = null;
 
 ReactDOM.render(
   <div className={ resetStyle.reset }>
-    <MuiThemeProvider muiTheme={ muiTheme }>
-      <FirstRun />
-    </MuiThemeProvider>
+    <ApiProvider api={ api }>
+      <MuiThemeProvider muiTheme={ muiTheme }>
+        <FirstRun visible={ isFirst } />
+      </MuiThemeProvider>
+    </ApiProvider>
   </div>,
   document.querySelector('#container')
 );

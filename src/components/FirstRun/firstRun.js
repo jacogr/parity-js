@@ -1,23 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-import { Dialog, FlatButton, TextField } from 'material-ui';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import { Dialog, FlatButton } from 'material-ui';
+
+import CreateAccount from './CreateAccount';
+import Welcome from './Welcome';
 
 const STAGE_NAMES = ['hello', 'new account', 'account created', 'setup completed'];
 const TITLE_STYLE = { borderStyle: 'none' };
-const LOGO_STYLE = {
-  float: 'right',
-  width: '25%',
-  height: 'auto'
-};
 
 export default class FirstRun extends Component {
+  static propTypes = {
+    visible: PropTypes.bool.isRequired
+  }
+
   state = {
     stage: 0
   }
 
   render () {
-    const open = true;
+    if (!this.props.visible) {
+      return null;
+    }
+
     const title = STAGE_NAMES[this.state.stage];
 
     return (
@@ -26,26 +30,19 @@ export default class FirstRun extends Component {
         titleStyle={ TITLE_STYLE }
         actions={ this.renderDialogActions() }
         actionsContainerStyle={ TITLE_STYLE }
-        open={ open }
+        open
         autoScrollBodyContent
         onRequestClose={ this.onClose }>
-        { this.renderPage() }
+        <Welcome visible={ this.state.stage === 0 } />
+        <CreateAccount visible={ this.state.stage === 1 } />
       </Dialog>
     );
-  }
-
-  renderPage () {
-    switch (this.state.stage) {
-      case 0:
-        return this.renderWelcomePage();
-      case 1:
-        return this.renderCreatePage();
-    }
   }
 
   renderDialogActions () {
     switch (this.state.stage) {
       case 0:
+      case 2:
         return (
           <FlatButton
             label='Next'
@@ -60,45 +57,6 @@ export default class FirstRun extends Component {
             onTouchTap={ this.onNextStage } />
         );
     }
-  }
-
-  renderWelcomePage () {
-    return (
-      <div>
-        <img
-          src='images/ethcore-logo-white-square.png'
-          alt='Ethcore Ltd.'
-          style={ LOGO_STYLE } />
-        <p>Welcome to <strong>Parity</strong>, the fastest and simplest way to run your node.</p>
-        <p>The next few steps will guide you through the process of setting up you Parity instance and the associated account.</p>
-        <p>Click <strong>Next</strong> to continue your journey.</p>
-      </div>
-    );
-  }
-
-  renderCreatePage () {
-    return (
-      <div>
-        <p>Setup your primary account below</p>
-        <p>
-          <TextField
-            name='accName'
-            hintText='A descriptive name for the account'
-            floatingLabelText='Account Name'
-            onChange={ this.updateCreateName } />
-          <RadioButtonGroup
-            name='accType'
-            defaultSelected='new'>
-            <RadioButton
-              value='new'
-              label='Create new account' />
-            <RadioButton
-              value='import'
-              label='Import existing account' />
-          </RadioButtonGroup>
-        </p>
-      </div>
-    );
   }
 
     // return [
@@ -124,8 +82,5 @@ export default class FirstRun extends Component {
     this.setState({
       stage: this.state.stage + 1
     });
-  }
-
-  updateCreateName = () => {
   }
 }
