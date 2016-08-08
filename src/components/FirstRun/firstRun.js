@@ -85,7 +85,6 @@ export default class FirstRun extends Component {
     // ];
 
   onClose = () => {
-
   }
 
   onBtnClose = () => {

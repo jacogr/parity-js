@@ -25,7 +25,7 @@
   "scripts": {
     "build": "npm run buildLibrary && npm run buildApp",
     "buildApp": "webpack",
-    "buildLibrary": "rollup -c",
+    "buildLibrary": "rollup --config ./rollup.library.js",
     "coveralls": "npm run testCoverage && coveralls < coverage/lcov.info",
     "lint": "eslint --ignore-path .gitignore ./src/",
     "release": "./scripts/release.sh",

@@ -4,6 +4,10 @@ import { TextField } from 'material-ui';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
 export default class CreateAccount extends Component {
+  static contextTypes = {
+    api: PropTypes.object.isRequired
+  }
+
   static propTypes = {
     visible: PropTypes.bool.isRequired
   }

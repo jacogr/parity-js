@@ -11,11 +11,13 @@ const muiTheme = getMuiTheme(darkBaseTheme);
 
 import resetStyle from './reset.css';
 
+import Api from './api';
 import ApiProvider from './components/ApiProvider';
 import FirstRun from './components/FirstRun';
 
 const isFirst = true;
-const api = null;
+
+const api = new Api(new Api.Transport.Http('/rpc'));
 
 ReactDOM.render(
   <div className={ resetStyle.reset }>

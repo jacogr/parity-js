@@ -12,7 +12,7 @@ export default class Completed extends Component {
 
     return (
       <div>
-        <p>Your node setup has been successfully completed.</p>
+        <p>Your node setup has been completed successfully.</p>
       </div>
     );
   }
