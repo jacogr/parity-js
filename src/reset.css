@@ -1,10 +1,19 @@
-:root .reset { font-size: initial; }
+:root html, :root body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+:root .reset { font-size: initial; width: 100%; height: 100%; }
 /* shame:on */
 /* Material-ui is changing input properties with inline styles. */
 /* because of that https://github.com/ethcore/eth-node-status-page is overriding all inputs with !important
 /* We want to keep it consistent and we use material ui, so we set the default color according to material ui */
-:root .reset input { 
-  margin-top: 0; 
+:root .reset input {
+  margin-top: 0;
   color: rgba(0, 0, 0, 0.870588) !important;
 }
 :root .reset input[disabled] {
@@ -12,12 +21,12 @@
 }
 /* shame:off */
 
-// Prefixed version of 
-/* http://meyerweb.com/eric/tools/css/reset/ 
+// Prefixed version of
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
-:root .reset html, :root .reset body, :root .reset div, :root .reset span, :root .reset applet, :root .reset object, :root .reset iframe,
+:root .reset div, :root .reset span, :root .reset applet, :root .reset object, :root .reset iframe,
 :root .reset h1, :root .reset h2, :root .reset h3, :root .reset h4, :root .reset h5, :root .reset h6, :root .reset p, :root .reset blockquote, :root .reset pre,
 :root .reset a, :root .reset abbr, :root .reset acronym, :root .reset address, :root .reset big, :root .reset cite, :root .reset code,
 :root .reset del, :root .reset dfn, :root .reset em, :root .reset img, :root .reset ins, :root .reset kbd, :root .reset q, :root .reset s, :root .reset samp,
@@ -26,8 +35,8 @@
 :root .reset dl, :root .reset dt, :root .reset dd, :root .reset ol, :root .reset ul, :root .reset li,
 :root .reset fieldset, :root .reset form, :root .reset label, :root .reset legend,
 :root .reset table, :root .reset caption, :root .reset tbody, :root .reset tfoot, :root .reset thead, :root .reset tr, :root .reset th, :root .reset td,
-:root .reset article, :root .reset aside, :root .reset canvas, :root .reset details, :root .reset embed, 
-:root .reset figure, :root .reset figcaption, :root .reset footer, :root .reset header, :root .reset hgroup, 
+:root .reset article, :root .reset aside, :root .reset canvas, :root .reset details, :root .reset embed,
+:root .reset figure, :root .reset figcaption, :root .reset footer, :root .reset header, :root .reset hgroup,
 :root .reset menu, :root .reset nav, :root .reset output, :root .reset ruby, :root .reset section, :root .reset summary,
 :root .reset time, :root .reset mark, :root .reset audio, :root .reset video {
   margin: 0;
@@ -38,7 +47,7 @@
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-:root .reset article, :root .reset aside, :root .reset details, :root .reset figcaption, :root .reset figure, 
+:root .reset article, :root .reset aside, :root .reset details, :root .reset figcaption, :root .reset figure,
 :root .reset footer, :root .reset header, :root .reset hgroup, :root .reset menu, :root .reset nav, :root .reset section {
   display: block;
 }

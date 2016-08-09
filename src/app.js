@@ -1,31 +1,30 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-const muiTheme = getMuiTheme(darkBaseTheme);
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 import resetStyle from './reset.css';
 
 import Api from './api';
-import ApiProvider from './components/ApiProvider';
+import Application from './components/Application';
 import FirstRun from './components/FirstRun';
 
 const isFirst = true;
-
-const api = new Api(new Api.Transport.Http('/rpc'));
+const muiTheme = getMuiTheme(darkBaseTheme);
+const api = new Api(new Api.Transport.Http('http://localhost:8545'));
 
 ReactDOM.render(
   <div className={ resetStyle.reset }>
-    <ApiProvider api={ api }>
-      <MuiThemeProvider muiTheme={ muiTheme }>
-        <FirstRun visible={ isFirst } />
-      </MuiThemeProvider>
-    </ApiProvider>
+    <Application
+      api={ api }
+      muiTheme={ muiTheme }>
+      <FirstRun
+        visible={ isFirst } />
+    </Application>
   </div>,
   document.querySelector('#container')
 );
