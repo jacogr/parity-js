@@ -2,9 +2,15 @@ var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var path = require('path');
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WebpackErrorNotificationPlugin = require('webpack-error-notification');
+
 var ENV = process.env.NODE_ENV || 'development';
 var isProd = ENV === 'production';
-var WebpackErrorNotificationPlugin = require('webpack-error-notification');
+
+var sassPaths = require('node-neat').includePaths.map(function (sassPath) {
+  return 'includePaths[]=' + sassPath;
+}).join('&');
 
 module.exports = {
   debug: !isProd,
@@ -45,8 +51,12 @@ module.exports = {
         loader: 'file?name=[name].[ext]'
       },
       {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap&' + sassPaths, 'autoprefixer')
+      },
+      {
         test: /\.css$/,
-        include: [/client/, /src/],
+        include: [/src/],
         loaders: [
           'style',
           'css?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
@@ -55,7 +65,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: [/client/, /src/],
+        exclude: [/src/],
         loader: 'style!css'
       },
       {
@@ -92,6 +102,7 @@ module.exports = {
   ],
   plugins: (function () {
     var plugins = [
+      new ExtractTextPlugin('[name].css'),
       new WebpackErrorNotificationPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
