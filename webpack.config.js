@@ -8,10 +8,6 @@ var WebpackErrorNotificationPlugin = require('webpack-error-notification');
 var ENV = process.env.NODE_ENV || 'development';
 var isProd = ENV === 'production';
 
-var sassPaths = require('node-neat').includePaths.map(function (sassPath) {
-  return 'includePaths[]=' + sassPath;
-}).join('&');
-
 module.exports = {
   debug: !isProd,
   cache: !isProd,
@@ -49,10 +45,6 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'file?name=[name].[ext]'
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap&' + sassPaths, 'autoprefixer')
       },
       {
         test: /\.css$/,
