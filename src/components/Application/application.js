@@ -16,7 +16,10 @@ export default class Application extends Component {
   }
 
   state = {
-    isFirst: false
+    isFirst: false,
+    clientVersion: '',
+    peerCount: 0,
+    blockNumber: 0
   }
 
   componentWillMount () {
@@ -27,6 +30,7 @@ export default class Application extends Component {
           isFirst: true // accounts.length === 0
         });
       });
+    setInterval(() => this.pollStatus(), 2500);
   }
 
   render () {
@@ -34,6 +38,11 @@ export default class Application extends Component {
       <div className={ styles.container }>
         <FirstRun
           visible={ this.state.isFirst } />
+        <div>
+          <div>{ this.state.clientVersion }</div>
+          <div>{ this.state.peerCount.toString() } peers</div>
+          <div>{ this.state.blockNumber.toString() }</div>
+        </div>
       </div>
     );
   }
@@ -43,5 +52,25 @@ export default class Application extends Component {
       api: this.props.api,
       muiTheme: this.props.muiTheme
     };
+  }
+
+  pollStatus () {
+    const api = this.props.api;
+
+    Promise
+      .all([
+        api.web3.clientVersion(),
+        api.net.peerCount(),
+        api.eth.blockNumber(),
+        api.eth.syncing()
+      ])
+      .then(([clientVersion, peerCount, blockNumber, syncing]) => {
+        console.log(clientVersion, peerCount, blockNumber, syncing);
+        this.setState({
+          blockNumber: blockNumber,
+          clientVersion: clientVersion,
+          peerCount: peerCount
+        });
+      });
   }
 }

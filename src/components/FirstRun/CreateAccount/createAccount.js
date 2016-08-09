@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import { TextField } from 'material-ui';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
+import FormWrap from '../../FormWrap';
+
 export default class CreateAccount extends Component {
   static contextTypes = {
     api: PropTypes.object.isRequired
@@ -25,10 +27,10 @@ export default class CreateAccount extends Component {
 
     return (
       <div>
-        <div>
+        <FormWrap>
           <RadioButtonGroup
-            name='accType'
-            defaultSelected='new'>
+            defaultSelected='new'
+            name='createType'>
             <RadioButton
               value='new'
               label='Create new account' />
@@ -36,33 +38,33 @@ export default class CreateAccount extends Component {
               value='import'
               label='Import existing account' />
           </RadioButtonGroup>
-        </div>
-        <div>
+        </FormWrap>
+        <FormWrap>
           <TextField
-            name='accName'
             hintText='A descriptive name for the account'
             floatingLabelText='Account Name'
+            fullWidth
             value={ this.state.accountName }
             onChange={ this.onEditAccountName } />
-        </div>
-        <div>
+        </FormWrap>
+        <FormWrap>
           <TextField
-            name='accPass1'
             hintText='A strong, unique password'
             floatingLabelText='Password'
+            fullWidth
             type='password'
             value={ this.state.password1 }
             onChange={ this.onEditPassword1 } />
-        </div>
-        <div>
+        </FormWrap>
+        <FormWrap>
           <TextField
-            name='accPass2'
             hintText='A strong, unique password'
             floatingLabelText='Password (repeat)'
+            fullWidth
             type='password'
             value={ this.state.password2 }
             onChange={ this.onEditPassword2 } />
-        </div>
+        </FormWrap>
       </div>
     );
   }
