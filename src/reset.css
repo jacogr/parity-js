@@ -5,6 +5,8 @@
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  background: rgb(52, 52, 52);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 :root .reset { font-size: initial; width: 100%; height: 100%; }

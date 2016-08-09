@@ -14,9 +14,12 @@ export default class Accounts extends Component {
   render () {
     const accounts = this.props.accounts.map((account) => {
       return (
-        <div className={ styles.account }>
+        <div
+          className={ styles.account }
+          key={ account }>
           <Paper>
-            <Account address={ account } />
+            <Account
+              address={ account } />
           </Paper>
         </div>
       );

@@ -1,16 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
-import styles from './style.css';
-
-export default class FormWrap extends Component {
+export default class Form extends Component {
   static propTypes = {
-    children: PropTypes.object
+    children: PropTypes.array
   }
-
   render () {
     return (
       <form
-        className={ styles.stretch }>
+        autoComplete='off'>
         { this.props.children }
       </form>
     );

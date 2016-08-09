@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
+import { Tabs, Tab } from 'material-ui/Tabs';
+import ActionAccountBalanceWallet from 'material-ui/svg-icons/action/account-balance-wallet';
+import ActionDashboard from 'material-ui/svg-icons/action/dashboard';
+
 import Accounts from '../Accounts';
 import FirstRun from '../FirstRun';
 
@@ -41,6 +45,14 @@ export default class Application extends Component {
       <div className={ styles.container }>
         <FirstRun
           visible={ this.state.isFirst } />
+        <Tabs>
+          <Tab
+            icon={ <ActionAccountBalanceWallet /> }
+            label='accounts' />
+          <Tab
+            icon={ <ActionDashboard /> }
+            label='tokens' />
+        </Tabs>
         <Accounts
           accounts={ this.state.accounts } />
         <div className={ styles.status }>

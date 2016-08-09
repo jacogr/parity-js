@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { TextField } from 'material-ui';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
+import Form from '../../Form';
 import FormWrap from '../../FormWrap';
 
 export default class CreateAccount extends Component {
@@ -26,7 +27,7 @@ export default class CreateAccount extends Component {
     }
 
     return (
-      <div>
+      <Form>
         <FormWrap>
           <RadioButtonGroup
             defaultSelected='new'
@@ -41,7 +42,7 @@ export default class CreateAccount extends Component {
         </FormWrap>
         <FormWrap>
           <TextField
-            autocomplete='off'
+            autoComplete='off'
             floatingLabelText='Account Name'
             fullWidth
             hintText='A descriptive name for the account'
@@ -50,6 +51,7 @@ export default class CreateAccount extends Component {
         </FormWrap>
         <FormWrap>
           <TextField
+            autoComplete='off'
             floatingLabelText='Password'
             fullWidth
             hintText='A strong, unique password'
@@ -59,6 +61,7 @@ export default class CreateAccount extends Component {
         </FormWrap>
         <FormWrap>
           <TextField
+            autoComplete='off'
             floatingLabelText='Password (repeat)'
             fullWidth
             hintText='A strong, unique password'
@@ -66,7 +69,7 @@ export default class CreateAccount extends Component {
             value={ this.state.password2 }
             onChange={ this.onEditPassword2 } />
         </FormWrap>
-      </div>
+      </Form>
     );
   }
 

@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
-import { Dialog, FlatButton } from 'material-ui';
+import { FlatButton } from 'material-ui';
+import ActionDone from 'material-ui/svg-icons/action/done';
+import ActionDoneAll from 'material-ui/svg-icons/action/done-all';
+import ActionTrendingFlat from 'material-ui/svg-icons/action/trending-flat';
+
+import TopDialog from '../TopDialog';
 
 import Completed from './Completed';
 import CreateAccount from './CreateAccount';
@@ -8,8 +13,6 @@ import RecoverAccount from './RecoverAccount';
 import Welcome from './Welcome';
 
 const STAGE_NAMES = ['hello', 'new account', 'account created', 'setup completed'];
-const TITLE_STYLE = { borderStyle: 'none' };
-const DIALOG_STYLE = { paddingTop: '1px' };
 
 export default class FirstRun extends Component {
   static propTypes = {
@@ -27,17 +30,10 @@ export default class FirstRun extends Component {
     }
 
     return (
-      <Dialog
+      <TopDialog
         actions={ this.renderDialogActions() }
-        actionsContainerStyle={ TITLE_STYLE }
-        autoDetectWindowHeight
-        autoScrollBodyContent
-        modal
         open={ this.state.open }
-        repositionOnUpdate={ false }
-        style={ DIALOG_STYLE }
-        title={ STAGE_NAMES[this.state.stage] }
-        titleStyle={ TITLE_STYLE }>
+        title={ STAGE_NAMES[this.state.stage] }>
         <Welcome
           visible={ this.state.stage === 0 } />
         <CreateAccount
@@ -49,7 +45,7 @@ export default class FirstRun extends Component {
           visible={ this.state.stage === 2 } />
         <Completed
           visible={ this.state.stage === 3 } />
-      </Dialog>
+      </TopDialog>
     );
   }
 
@@ -59,6 +55,7 @@ export default class FirstRun extends Component {
       case 2:
         return (
           <FlatButton
+            icon={ <ActionTrendingFlat /> }
             label='Next'
             primary
             onTouchTap={ this.onBtnNext } />
@@ -66,6 +63,7 @@ export default class FirstRun extends Component {
       case 1:
         return (
           <FlatButton
+            icon={ <ActionDone /> }
             label='Create'
             primary
             onTouchTap={ this.onBtnNext } />
@@ -73,6 +71,7 @@ export default class FirstRun extends Component {
       case 3:
         return (
           <FlatButton
+            icon={ <ActionDoneAll /> }
             label='Close'
             primary
             onTouchTap={ this.onBtnClose } />
