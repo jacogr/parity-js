@@ -13,7 +13,9 @@ export default class CreateAccount extends Component {
   }
 
   state = {
-    accountName: ''
+    accountName: '',
+    password1: '',
+    password2: ''
   }
 
   render () {
@@ -23,7 +25,7 @@ export default class CreateAccount extends Component {
 
     return (
       <div>
-        <p>
+        <div>
           <RadioButtonGroup
             name='accType'
             defaultSelected='new'>
@@ -34,15 +36,33 @@ export default class CreateAccount extends Component {
               value='import'
               label='Import existing account' />
           </RadioButtonGroup>
-        </p>
-        <p>
+        </div>
+        <div>
           <TextField
             name='accName'
             hintText='A descriptive name for the account'
             floatingLabelText='Account Name'
             value={ this.state.accountName }
             onChange={ this.onEditAccountName } />
-        </p>
+        </div>
+        <div>
+          <TextField
+            name='accPass1'
+            hintText='A strong, unique password'
+            floatingLabelText='Password'
+            type='password'
+            value={ this.state.password1 }
+            onChange={ this.onEditPassword1 } />
+        </div>
+        <div>
+          <TextField
+            name='accPass2'
+            hintText='A strong, unique password'
+            floatingLabelText='Password (repeat)'
+            type='password'
+            value={ this.state.password2 }
+            onChange={ this.onEditPassword2 } />
+        </div>
       </div>
     );
   }
@@ -50,6 +70,18 @@ export default class CreateAccount extends Component {
   onEditAccountName = (event) => {
     this.setState({
       accountName: event.target.value
+    });
+  }
+
+  onEditPassword1 = (event) => {
+    this.setState({
+      password1: event.target.value
+    });
+  }
+
+  onEditPassword2 = (event) => {
+    this.setState({
+      password2: event.target.value
     });
   }
 }

@@ -34,10 +34,17 @@ export default class FirstRun extends Component {
         open={ this.state.open }
         autoScrollBodyContent
         onRequestClose={ this.onClose }>
-        <Welcome visible={ this.state.stage === 0 } />
-        <CreateAccount visible={ this.state.stage === 1 } />
-        <RecoverAccount visible={ this.state.stage === 2 } />
-        <Completed visible={ this.state.stage === 3 } />
+        <Welcome
+          visible={ this.state.stage === 0 } />
+        <CreateAccount
+          visible={ this.state.stage === 1 } />
+        <RecoverAccount
+          accountName='Newly Created Name'
+          accountAddress='0xF6ABb80F11f269e4500A05721680E0a3AB075Ecf'
+          accountPhrase='twenty never horse quick battery foot staple rabbit skate chair'
+          visible={ this.state.stage === 2 } />
+        <Completed
+          visible={ this.state.stage === 3 } />
       </Dialog>
     );
   }
