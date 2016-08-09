@@ -1,16 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-import { FlatButton } from 'material-ui';
-import { Tabs, Tab } from 'material-ui/Tabs';
-import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import ActionAccountBalance from 'material-ui/svg-icons/action/account-balance';
-import ActionAccountBalanceWallet from 'material-ui/svg-icons/action/account-balance-wallet';
-import ActionDashboard from 'material-ui/svg-icons/action/dashboard';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import ContentSend from 'material-ui/svg-icons/content/send';
-
 import Accounts from '../Accounts';
 import FirstRun from '../FirstRun';
+import TabBar from '../TabBar';
 
 import styles from './style.css';
 
@@ -34,15 +26,8 @@ export default class Application extends Component {
   }
 
   componentWillMount () {
-    this.props.api.personal
-      .listAccounts()
-      .then((accounts) => {
-        this.setState({
-          accounts: accounts,
-          isFirst: true // accounts.length === 0
-        });
-      });
-    setInterval(() => this.pollStatus(), 2500);
+    this.retrieveAccounts();
+    this.pollStatus();
   }
 
   render () {
@@ -50,35 +35,8 @@ export default class Application extends Component {
       <div className={ styles.container }>
         <FirstRun
           visible={ this.state.isFirst } />
-        <Tabs>
-          <Tab
-            icon={ <ActionAccountBalanceWallet /> }
-            label='accounts' />
-          <Tab
-            icon={ <ActionDashboard /> }
-            label='tokens' />
-        </Tabs>
-        <Toolbar>
-          <ToolbarGroup>
-            <FlatButton
-              icon={ <ContentSend /> }
-              label='transfer'
-              primary
-              onTouchTap={ this.onBtnClose } />
-            <FlatButton
-              icon={ <ContentAdd /> }
-              label='new account'
-              primary
-              onTouchTap={ this.onBtnClose } />
-            <FlatButton
-              icon={ <ActionAccountBalance /> }
-              label='fund account'
-              primary
-              onTouchTap={ this.onBtnClose } />
-          </ToolbarGroup>
-        </Toolbar>
-        <Accounts
-          accounts={ this.state.accounts } />
+        <TabBar />
+        <Accounts />
         <div className={ styles.status }>
           <div>{ this.state.clientVersion }</div>
           <div>{ this.state.peerCount } peers</div>
@@ -93,6 +51,17 @@ export default class Application extends Component {
       api: this.props.api,
       muiTheme: this.props.muiTheme
     };
+  }
+
+  retrieveAccounts () {
+    this.props.api.personal
+      .listAccounts()
+      .then((accounts) => {
+        this.setState({
+          accounts: accounts,
+          isFirst: true // accounts.length === 0
+        });
+      });
   }
 
   pollStatus () {
@@ -113,5 +82,7 @@ export default class Application extends Component {
           syncing: syncing
         });
       });
+
+    setTimeout(() => this.pollStatus(), 2500);
   }
 }
