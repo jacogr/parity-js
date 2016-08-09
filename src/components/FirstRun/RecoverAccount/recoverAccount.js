@@ -20,7 +20,8 @@ export default class RecoverAccount extends Component {
 
     return (
       <div>
-        <IdentityIcon address={ this.props.accountAddress } />
+        <IdentityIcon
+          address={ this.props.accountAddress } />
         <FormWrap>
           <TextField
             hintText='A descriptive name for the account'

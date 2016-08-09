@@ -9,6 +9,7 @@ import Welcome from './Welcome';
 
 const STAGE_NAMES = ['hello', 'new account', 'account created', 'setup completed'];
 const TITLE_STYLE = { borderStyle: 'none' };
+const DIALOG_STYLE = { paddingTop: '1px' };
 
 export default class FirstRun extends Component {
   static propTypes = {
@@ -27,13 +28,16 @@ export default class FirstRun extends Component {
 
     return (
       <Dialog
-        title={ STAGE_NAMES[this.state.stage] }
-        titleStyle={ TITLE_STYLE }
         actions={ this.renderDialogActions() }
         actionsContainerStyle={ TITLE_STYLE }
-        open={ this.state.open }
+        autoDetectWindowHeight
         autoScrollBodyContent
-        onRequestClose={ this.onClose }>
+        modal
+        open={ this.state.open }
+        repositionOnUpdate={ false }
+        style={ DIALOG_STYLE }
+        title={ STAGE_NAMES[this.state.stage] }
+        titleStyle={ TITLE_STYLE }>
         <Welcome
           visible={ this.state.stage === 0 } />
         <CreateAccount

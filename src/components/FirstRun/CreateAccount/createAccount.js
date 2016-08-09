@@ -41,26 +41,27 @@ export default class CreateAccount extends Component {
         </FormWrap>
         <FormWrap>
           <TextField
-            hintText='A descriptive name for the account'
+            autocomplete='off'
             floatingLabelText='Account Name'
             fullWidth
+            hintText='A descriptive name for the account'
             value={ this.state.accountName }
             onChange={ this.onEditAccountName } />
         </FormWrap>
         <FormWrap>
           <TextField
-            hintText='A strong, unique password'
             floatingLabelText='Password'
             fullWidth
+            hintText='A strong, unique password'
             type='password'
             value={ this.state.password1 }
             onChange={ this.onEditPassword1 } />
         </FormWrap>
         <FormWrap>
           <TextField
-            hintText='A strong, unique password'
             floatingLabelText='Password (repeat)'
             fullWidth
+            hintText='A strong, unique password'
             type='password'
             value={ this.state.password2 }
             onChange={ this.onEditPassword2 } />

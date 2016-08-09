@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
+import Accounts from '../Accounts';
 import FirstRun from '../FirstRun';
 
 import styles from './style.css';
@@ -19,7 +20,8 @@ export default class Application extends Component {
     isFirst: false,
     clientVersion: '',
     peerCount: 0,
-    blockNumber: 0
+    blockNumber: 0,
+    accounts: []
   }
 
   componentWillMount () {
@@ -27,6 +29,7 @@ export default class Application extends Component {
       .listAccounts()
       .then((accounts) => {
         this.setState({
+          accounts: accounts,
           isFirst: true // accounts.length === 0
         });
       });
@@ -38,10 +41,12 @@ export default class Application extends Component {
       <div className={ styles.container }>
         <FirstRun
           visible={ this.state.isFirst } />
-        <div>
+        <Accounts
+          accounts={ this.state.accounts } />
+        <div className={ styles.status }>
           <div>{ this.state.clientVersion }</div>
-          <div>{ this.state.peerCount.toString() } peers</div>
-          <div>{ this.state.blockNumber.toString() }</div>
+          <div>{ this.state.peerCount } peers</div>
+          <div>{ this.state.blockNumber }</div>
         </div>
       </div>
     );
@@ -65,11 +70,11 @@ export default class Application extends Component {
         api.eth.syncing()
       ])
       .then(([clientVersion, peerCount, blockNumber, syncing]) => {
-        console.log(clientVersion, peerCount, blockNumber, syncing);
         this.setState({
-          blockNumber: blockNumber,
+          blockNumber: blockNumber.toFormat(0),
           clientVersion: clientVersion,
-          peerCount: peerCount
+          peerCount: peerCount.toString(),
+          syncing: syncing
         });
       });
   }
