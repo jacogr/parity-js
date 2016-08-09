@@ -1,0 +1,10 @@
+.icon {
+  float: right;
+  width: 25%;
+  height: auto;
+  text-align: right;
+}
+
+.icon img {
+  border-radius: 5px;
+}
