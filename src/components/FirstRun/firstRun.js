@@ -4,7 +4,7 @@ import { FlatButton } from 'material-ui';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import ActionDone from 'material-ui/svg-icons/action/done';
 import ActionDoneAll from 'material-ui/svg-icons/action/done-all';
-import ActionTrendingFlat from 'material-ui/svg-icons/action/trending-flat';
+import NavigationArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 
 import TopDialog from '../TopDialog';
 
@@ -55,7 +55,10 @@ export default class FirstRun extends Component {
       return (
         <Step
           key={ label }>
-          <StepLabel>{ label }</StepLabel>
+          <StepLabel
+            style={ { fontSize: 'inherit' } }>
+            { label }
+          </StepLabel>
         </Step>
       );
     });
@@ -63,6 +66,7 @@ export default class FirstRun extends Component {
     return (
       <h2>
         <Stepper
+          style={ { fontSize: 'inherit' } }
           activeStep={ this.state.stage }>
           { steps }
         </Stepper>
@@ -76,7 +80,7 @@ export default class FirstRun extends Component {
       case 2:
         return (
           <FlatButton
-            icon={ <ActionTrendingFlat /> }
+            icon={ <NavigationArrowForward /> }
             label='Next'
             primary
             onTouchTap={ this.onBtnNext } />

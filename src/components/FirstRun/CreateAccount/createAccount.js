@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import { TextField } from 'material-ui';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
 import Form from '../../Form';
 import FormWrap from '../../FormWrap';
@@ -28,18 +27,6 @@ export default class CreateAccount extends Component {
 
     return (
       <Form>
-        <FormWrap>
-          <RadioButtonGroup
-            defaultSelected='new'
-            name='createType'>
-            <RadioButton
-              value='new'
-              label='Create new account' />
-            <RadioButton
-              value='import'
-              label='Import existing account' />
-          </RadioButtonGroup>
-        </FormWrap>
         <FormWrap>
           <TextField
             autoComplete='off'

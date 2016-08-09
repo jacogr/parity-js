@@ -1,0 +1,7 @@
+.form {
+}
+
+:root .form input:-webkit-autofill {
+  display: none;
+  opacity: 0;
+}

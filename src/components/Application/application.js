@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
+import { FlatButton } from 'material-ui';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import ActionAccountBalanceWallet from 'material-ui/svg-icons/action/account-balance-wallet';
 import ActionDashboard from 'material-ui/svg-icons/action/dashboard';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import Accounts from '../Accounts';
 import FirstRun from '../FirstRun';
@@ -53,6 +56,15 @@ export default class Application extends Component {
             icon={ <ActionDashboard /> }
             label='tokens' />
         </Tabs>
+        <Toolbar>
+          <ToolbarGroup>
+            <FlatButton
+              icon={ <ContentAdd /> }
+              label='new account'
+              primary
+              onTouchTap={ this.onBtnClose } />
+          </ToolbarGroup>
+        </Toolbar>
         <Accounts
           accounts={ this.state.accounts } />
         <div className={ styles.status }>

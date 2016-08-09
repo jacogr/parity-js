@@ -6,6 +6,8 @@ import Account from './Account';
 
 import styles from './style.css';
 
+const PAPER_STYLE = { backgroundColor: 'transparent' };
+
 export default class Accounts extends Component {
   static propTypes = {
     accounts: PropTypes.array.isRequired
@@ -17,7 +19,8 @@ export default class Accounts extends Component {
         <div
           className={ styles.account }
           key={ account }>
-          <Paper>
+          <Paper
+            style={ PAPER_STYLE }>
             <Account
               address={ account } />
           </Paper>
