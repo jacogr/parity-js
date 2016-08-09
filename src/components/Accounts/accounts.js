@@ -1,12 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-import Paper from 'material-ui/Paper';
-
 import Account from './Account';
 
 import styles from './style.css';
-
-const PAPER_STYLE = { backgroundColor: 'transparent' };
 
 export default class Accounts extends Component {
   static propTypes = {
@@ -19,11 +15,8 @@ export default class Accounts extends Component {
         <div
           className={ styles.account }
           key={ account }>
-          <Paper
-            style={ PAPER_STYLE }>
-            <Account
-              address={ account } />
-          </Paper>
+          <Account
+            address={ account } />
         </div>
       );
     });

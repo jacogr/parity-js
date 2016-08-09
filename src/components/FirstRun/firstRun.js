@@ -13,6 +13,8 @@ import CreateAccount from './CreateAccount';
 import RecoverAccount from './RecoverAccount';
 import Welcome from './Welcome';
 
+import styles from './style.css';
+
 const STAGE_NAMES = ['welcome', 'new account', 'recovery', 'completed'];
 
 export default class FirstRun extends Component {
@@ -55,8 +57,7 @@ export default class FirstRun extends Component {
       return (
         <Step
           key={ label }>
-          <StepLabel
-            style={ { fontSize: 'inherit' } }>
+          <StepLabel>
             { label }
           </StepLabel>
         </Step>
@@ -64,13 +65,15 @@ export default class FirstRun extends Component {
     });
 
     return (
-      <h2>
+      <div>
+        <h2 className={ styles.title }>
+          { STAGE_NAMES[this.state.stage] }
+        </h2>
         <Stepper
-          style={ { fontSize: 'inherit' } }
           activeStep={ this.state.stage }>
           { steps }
         </Stepper>
-      </h2>
+      </div>
     );
   }
 
