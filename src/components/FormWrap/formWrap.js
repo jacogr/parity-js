@@ -9,10 +9,9 @@ export default class FormWrap extends Component {
 
   render () {
     return (
-      <form
-        className={ styles.stretch }>
+      <div className={ styles.stretch }>
         { this.props.children }
-      </form>
+      </div>
     );
   }
 }

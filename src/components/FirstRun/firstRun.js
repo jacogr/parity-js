@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { FlatButton } from 'material-ui';
+import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import ActionDone from 'material-ui/svg-icons/action/done';
 import ActionDoneAll from 'material-ui/svg-icons/action/done-all';
 import ActionTrendingFlat from 'material-ui/svg-icons/action/trending-flat';
@@ -12,7 +13,7 @@ import CreateAccount from './CreateAccount';
 import RecoverAccount from './RecoverAccount';
 import Welcome from './Welcome';
 
-const STAGE_NAMES = ['hello', 'new account', 'account created', 'setup completed'];
+const STAGE_NAMES = ['welcome', 'new account', 'recovery', 'completed'];
 
 export default class FirstRun extends Component {
   static propTypes = {
@@ -33,7 +34,7 @@ export default class FirstRun extends Component {
       <TopDialog
         actions={ this.renderDialogActions() }
         open={ this.state.open }
-        title={ STAGE_NAMES[this.state.stage] }>
+        title={ this.renderStepper() }>
         <Welcome
           visible={ this.state.stage === 0 } />
         <CreateAccount
@@ -46,6 +47,26 @@ export default class FirstRun extends Component {
         <Completed
           visible={ this.state.stage === 3 } />
       </TopDialog>
+    );
+  }
+
+  renderStepper () {
+    const steps = STAGE_NAMES.map((label) => {
+      return (
+        <Step
+          key={ label }>
+          <StepLabel>{ label }</StepLabel>
+        </Step>
+      );
+    });
+
+    return (
+      <h2>
+        <Stepper
+          activeStep={ this.state.stage }>
+          { steps }
+        </Stepper>
+      </h2>
     );
   }
 

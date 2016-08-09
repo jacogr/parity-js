@@ -15,6 +15,9 @@ import Application from './components/Application';
 const muiTheme = getMuiTheme(darkBaseTheme);
 const api = new Api(new Api.Transport.Http('/rpc/'));
 
+muiTheme.stepper.textColor = '#eee';
+muiTheme.stepper.disabledTextColor = '#777';
+
 ReactDOM.render(
   <div className={ resetStyle.reset }>
     <Application

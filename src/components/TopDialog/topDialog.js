@@ -11,7 +11,9 @@ export default class TopDialog extends Component {
     actions: PropTypes.object,
     children: PropTypes.array,
     open: PropTypes.bool,
-    title: PropTypes.string
+    title: React.PropTypes.oneOfType([
+      PropTypes.object, PropTypes.string
+    ])
   }
 
   render () {
