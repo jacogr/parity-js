@@ -11,12 +11,15 @@ export default class TabBar extends Component {
     return (
       <Tabs>
         <Tab
+          data-route='/accounts'
           icon={ <ActionAccountBalanceWallet /> }
           label='accounts' />
         <Tab
+          data-route='/tokens'
           icon={ <ActionDashboard /> }
           label='tokens' />
         <Tab
+          data-route='/apps'
           icon={ <NavigationApps /> }
           label='apps' />
       </Tabs>

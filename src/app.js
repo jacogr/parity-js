@@ -25,13 +25,10 @@ muiTheme.tabs.backgroundColor = 'rgb(65, 65, 65)';
 muiTheme.toolbar = lightTheme.toolbar;
 muiTheme.toolbar.backgroundColor = 'rgb(80, 80, 80)';
 
-console.log(muiTheme);
-
 ReactDOM.render(
-  <div className={ resetStyle.reset }>
-    <Application
-      api={ api }
-      muiTheme={ muiTheme } />
-  </div>,
+  <Application
+    api={ api }
+    className={ resetStyle.reset }
+    muiTheme={ muiTheme } />,
   document.querySelector('#container')
 );

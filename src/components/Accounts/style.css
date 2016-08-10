@@ -1,13 +1,10 @@
 .account {
   flex: 0 1 50%;
   width: 50%;
-  padding: 1em 0;
 }
 
 .account>div {
-  margin: 1em;
   height: 100%;
-  padding: 1em;
 }
 
 .accounts {

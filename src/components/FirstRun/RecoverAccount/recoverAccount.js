@@ -26,6 +26,7 @@ export default class RecoverAccount extends Component {
         <FormWrap>
           <TextField
             autoComplete='off'
+            disabled
             hintText='A descriptive name for the account'
             floatingLabelText='Account Name'
             fullWidth
@@ -34,6 +35,7 @@ export default class RecoverAccount extends Component {
         <FormWrap>
           <TextField
             autoComplete='off'
+            disabled
             hintText='The network address for the account'
             floatingLabelText='Address'
             fullWidth
@@ -42,6 +44,7 @@ export default class RecoverAccount extends Component {
         <FormWrap>
           <TextField
             autoComplete='off'
+            disabled
             hintText='The account recovery phrase'
             floatingLabelText='Recovery Phrase'
             fullWidth

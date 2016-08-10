@@ -1,8 +1,7 @@
 .icon {
   float: right;
-  width: 25%;
-  height: auto;
   text-align: right;
+  margin: 1em 1em 0 0;
 }
 
 .icon img {
