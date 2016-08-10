@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import AccountSummary from './AccountSummary';
 import Actions from './Actions';
+import NewAccount from '../NewAccount';
 
 import styles from './style.css';
 
@@ -11,7 +12,10 @@ export default class Accounts extends Component {
   }
 
   state = {
-    accounts: []
+    accounts: [],
+    fundDialog: false,
+    newDialog: false,
+    transferDialog: false
   }
 
   componentWillMount () {
@@ -21,7 +25,12 @@ export default class Accounts extends Component {
   render () {
     return (
       <div>
-        <Actions />
+        <NewAccount
+          visible={ this.state.newDialog } />
+        <Actions
+          onFundAccount={ this.onFundAccountClick }
+          onNewAccount={ this.onNewAccountClick }
+          onTransfer={ this.onTransferClick } />
         <div className={ styles.accounts }>
           { this.renderAccounts() }
         </div>
@@ -44,6 +53,18 @@ export default class Accounts extends Component {
         </div>
       );
     });
+  }
+
+  onFundAccountClick = () => {
+    this.setState({ fundDialog: !this.state.fundDialog });
+  }
+
+  onNewAccountClick = () => {
+    this.setState({ newDialog: !this.state.newDialog });
+  }
+
+  onTransferClick = () => {
+    this.setState({ transferDialog: !this.state.transferDialog });
   }
 
   retrieveAccounts () {

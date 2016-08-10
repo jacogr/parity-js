@@ -12,7 +12,7 @@
 :root a, :root a:visited {
   text-decoration: none;
   cursor: pointer;
-  color: rgb(0, 151, 167);
+  color: rgb(0, 151, 167); /* #f80 */
 }
 
 :root a:hover {

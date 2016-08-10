@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { TextField } from 'material-ui';
-import { Card, CardText, CardTitle } from 'material-ui/Card';
+import { Card, CardText } from 'material-ui/Card';
 
 import Balances from '../Balances';
 import Form from '../Form';
@@ -21,6 +21,10 @@ export default class Account extends Component {
 
   state = {
     name: 'Unnamed'
+  }
+
+  componentWillMount () {
+    this.retrieveMeta();
   }
 
   render () {
@@ -62,8 +66,26 @@ export default class Account extends Component {
   }
 
   onEditName = (event) => {
+    const api = this.context.api;
+    const name = event.target.value;
+
     this.setState({
-      name: event.target.value
+      name: name
+    }, () => {
+      api.personal.setAccountName(this.props.params.address, name);
     });
+  }
+
+  retrieveMeta () {
+    this.context.api.personal
+      .accountsInfo()
+      .then((infos) => {
+        const info = infos[this.props.params.address];
+        this.setState({
+          name: info.name,
+          uuid: info.uuid,
+          meta: info.meta
+        });
+      });
   }
 }

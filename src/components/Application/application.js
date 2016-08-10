@@ -19,7 +19,7 @@ export default class Application extends Component {
   }
 
   state = {
-    isFirst: false,
+    showFirst: false,
     accounts: []
   }
 
@@ -31,7 +31,8 @@ export default class Application extends Component {
     return (
       <div className={ styles.container }>
         <FirstRun
-          visible={ this.state.isFirst } />
+          onClose={ this.onCloseFirst }
+          visible={ this.state.showFirst } />
         <TabBar />
         <Routes />
         <Status />
@@ -52,8 +53,14 @@ export default class Application extends Component {
       .then((accounts) => {
         this.setState({
           accounts: accounts,
-          isFirst: accounts.length === 0
+          showFirst: true // accounts.length === 0
         });
       });
+  }
+
+  onCloseFirst = () => {
+    this.setState({
+      showFirst: false
+    });
   }
 }
