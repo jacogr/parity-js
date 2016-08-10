@@ -38,20 +38,34 @@ export default class Accounts extends Component {
       return (
         <div
           className={ styles.account }
-          key={ account }>
+          key={ account.address }>
           <AccountSummary
-            address={ account } />
+            account={ account } />
         </div>
       );
     });
   }
 
   retrieveAccounts () {
-    this.context.api.personal
-      .listAccounts()
-      .then((accounts) => {
+    const api = this.context.api;
+
+    Promise
+      .all([
+        api.personal.listAccounts(),
+        api.personal.accountsInfo()
+      ])
+      .then(([addresses, infos]) => {
         this.setState({
-          accounts: accounts
+          accounts: addresses.map((address) => {
+            const info = infos[address];
+
+            return {
+              address: address,
+              name: info.name,
+              uuid: info.uuid,
+              meta: info.meta
+            };
+          })
         });
       });
   }

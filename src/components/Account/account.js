@@ -42,6 +42,8 @@ export default class Account extends Component {
                   hintText='A descriptive name for the account'
                   value={ this.state.name }
                   onChange={ this.onEditName } />
+              </FormWrap>
+              <FormWrap>
                 <TextField
                   autoComplete='off'
                   disabled

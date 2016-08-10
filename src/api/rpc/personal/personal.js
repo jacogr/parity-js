@@ -1,5 +1,5 @@
 import { inAddress, inNumber10, inOptions } from '../../format/input';
-import { outAddress } from '../../format/output';
+import { outAccountInfo, outAddress } from '../../format/output';
 
 export default class Personal {
   constructor (transport) {
@@ -8,7 +8,8 @@ export default class Personal {
 
   accountsInfo () {
     return this._transport
-      .execute('personal_accountsInfo');
+      .execute('personal_accountsInfo')
+      .then(outAccountInfo);
   }
 
   listAccounts () {

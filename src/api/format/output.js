@@ -2,6 +2,22 @@ import BigNumber from 'bignumber.js';
 
 import { toChecksumAddress } from './address';
 
+export function outAccountInfo (infos) {
+  const ret = {};
+
+  Object.keys(infos).forEach((address) => {
+    const info = infos[address];
+
+    ret[outAddress(address)] = {
+      name: info.name,
+      uuid: info.uuid,
+      meta: JSON.parse(info.meta)
+    };
+  });
+
+  return ret;
+}
+
 export function outAddress (address) {
   return toChecksumAddress(address);
 }
@@ -40,6 +56,14 @@ export function outDate (date) {
 
 export function outNumber (number) {
   return new BigNumber(number || 0);
+}
+
+export function outPeers (peers) {
+  return {
+    active: outNumber(peers.active),
+    connected: outNumber(peers.connected),
+    max: outNumber(peers.max)
+  };
 }
 
 export function outReceipt (receipt) {

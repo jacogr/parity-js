@@ -1,11 +1,25 @@
 import BigNumber from 'bignumber.js';
 
-import { outBlock, outAddress, outDate, outNumber, outReceipt, outTransaction } from './output';
+import { outBlock, outAccountInfo, outAddress, outDate, outNumber, outPeers, outReceipt, outTransaction } from './output';
 import { isAddress, isBigNumber, isInstanceOf } from '../../../test/types';
 
 describe('api/format/output', () => {
   const address = '0x63cf90d3f0410092fc0fca41846f596223979195';
   const checksum = '0x63Cf90D3f0410092FC0fca41846f596223979195';
+
+  describe('outAccountInfo', () => {
+    it('returns meta objects parsed', () => {
+      expect(outAccountInfo(
+        { '0x63cf90d3f0410092fc0fca41846f596223979195': {
+          name: 'name', uuid: 'uuid', meta: '{"name":"456"}' }
+        }
+      )).to.deep.equal({
+        '0x63Cf90D3f0410092FC0fca41846f596223979195': {
+          name: 'name', uuid: 'uuid', meta: { name: '456' }
+        }
+      });
+    });
+  });
 
   describe('outAddress', () => {
     it('retuns the address as checksummed', () => {
@@ -100,6 +114,16 @@ describe('api/format/output', () => {
 
     it('assumes 0 when ivalid input', () => {
       expect(outNumber().eq(0)).to.be.true;
+    });
+  });
+
+  describe('outPeers', () => {
+    it('converts all internal numbers to BigNumbers', () => {
+      expect(outPeers({ active: 789, connected: '456', max: 0x7b })).to.deep.equal({
+        active: new BigNumber(789),
+        connected: new BigNumber(456),
+        max: new BigNumber(123)
+      });
     });
   });
 

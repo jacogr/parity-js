@@ -14,7 +14,7 @@ export default class AccountSummary extends Component {
   }
 
   static propTypes = {
-    address: PropTypes.string.isRequired
+    account: PropTypes.object.isRequired
   }
 
   state = {
@@ -22,18 +22,19 @@ export default class AccountSummary extends Component {
   }
 
   render () {
-    const viewLink = `/account/${this.props.address}`;
+    const account = this.props.account;
+    const viewLink = `/account/${account.address}`;
 
     return (
       <Card>
         <IdentityIcon
-          address={ this.props.address } />
+          address={ account.address } />
         <CardTitle
           style={ TITLE_STYLE }
-          title={ <Link to={ viewLink }>{ this.state.name }</Link> } />
+          title={ <Link to={ viewLink }>{ account.name || 'Unnamed' }</Link> } />
         <CardText>
           <Balances
-            address={ this.props.address } />
+            address={ account.address } />
         </CardText>
       </Card>
     );

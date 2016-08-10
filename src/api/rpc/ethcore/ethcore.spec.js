@@ -40,6 +40,18 @@ describe('api/rpc/Ethcore', () => {
     });
   });
 
+  describe('newPeers', () => {
+    it('returns the peer structure, formatted', () => {
+      mockHttp([{ method: 'ethcore_netPeers', reply: { result: { active: 123, connected: 456, max: 789 } } }]);
+
+      return instance.netPeers().then((peers) => {
+        expect(peers.active.eq(123)).to.be.true;
+        expect(peers.connected.eq(456)).to.be.true;
+        expect(peers.max.eq(789)).to.be.true;
+      });
+    });
+  });
+
   describe('netPort', () => {
     it('returns the connected port, formatted', () => {
       mockHttp([{ method: 'ethcore_netPort', reply: { result: 33030 } }]);

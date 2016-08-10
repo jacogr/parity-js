@@ -1,5 +1,5 @@
 import { inAddress, inData, inNumber16 } from '../../format/input';
-import { outNumber } from '../../format/output';
+import { outNumber, outPeers } from '../../format/output';
 
 export default class Ethcore {
   constructor (transport) {
@@ -56,6 +56,12 @@ export default class Ethcore {
   netChain () {
     return this._transport
       .execute('ethcore_netChain');
+  }
+
+  netPeers () {
+    return this._transport
+      .execute('ethcore_netPeers')
+      .then(outPeers);
   }
 
   netMaxPeers () {
