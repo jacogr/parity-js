@@ -10,7 +10,9 @@ const CONTENT_STYLE = { transform: 'translate(0px, 0px)' };
 
 export default class Overlay extends Component {
   static propTypes = {
-    actions: PropTypes.object,
+    actions: PropTypes.oneOf([
+      PropTypes.array, PropTypes.object
+    ]),
     children: PropTypes.oneOf([
       PropTypes.array, PropTypes.object
     ]),

@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
+import { FlatButton } from 'material-ui';
+import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+import NavigationArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
+
 import Overlay from '../Overlay';
 
 const STAGE_NAMES = ['creation type', 'new account', 'recovery', 'completed'];
@@ -18,17 +22,50 @@ export default class NewAccount extends Component {
     return (
       <Overlay
         actions={ this.renderDialogActions() }
-        title={ this.renderStepper() }
+        current={ this.state.stage }
+        steps={ STAGE_NAMES }
         visible={ this.props.visible }>
-        <div>dialog</div>
+        <div>{ this.state.stage }</div>
       </Overlay>
     );
   }
 
   renderDialogActions () {
+    switch (this.state.stage) {
+      case 0:
+        return (
+          <FlatButton
+            icon={ <NavigationArrowForward /> }
+            label='Next'
+            primary
+            onTouchTap={ this.onNext } />
+        );
+      default:
+        return [
+          <FlatButton
+            icon={ <NavigationArrowBack /> }
+            label='Back'
+            primary
+            onTouchTap={ this.onPrev } />,
+          <FlatButton
+            icon={ <NavigationArrowForward /> }
+            label='Next'
+            primary
+            onTouchTap={ this.onNext } />
+        ];
+    }
   }
 
-  renderStepper () {
+  onNext = () => {
+    this.setState({
+      stage: this.state.stage + 1
+    });
+  }
+
+  onPrev = () => {
+    this.setState({
+      stage: this.state.stage - 1
+    });
   }
 
   onClose = () => {
