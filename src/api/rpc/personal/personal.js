@@ -6,6 +6,11 @@ export default class Personal {
     this._transport = transport;
   }
 
+  accountsInfo () {
+    return this._transport
+      .execute('personal_accountsInfo');
+  }
+
   listAccounts () {
     return this._transport
       .execute('personal_listAccounts')
@@ -16,6 +21,16 @@ export default class Personal {
     return this._transport
       .execute('personal_newAccount', password)
       .then(outAddress);
+  }
+
+  setAccountName (address, name) {
+    return this._transport
+      .execute('personal_setAccountName', inAddress(address), name);
+  }
+
+  setAccountMeta (address, meta) {
+    return this._transport
+      .execute('personal_setAccountMeta', inAddress(address), JSON.stringify(meta));
   }
 
   signAndSendTransaction (options, password) {
