@@ -26,13 +26,13 @@ export default class Personal {
 
   newAccountFromPhrase (phrase, password) {
     return this._transport
-      .execute('personal_newAccountFromPhrase')
+      .execute('personal_newAccountFromPhrase', phrase, password)
       .then(outAddress);
   }
 
   newAccountFromWallet (json, password) {
     return this._transport
-      .execute('personal_newAccountFromWallet')
+      .execute('personal_newAccountFromWallet', json, password)
       .then(outAddress);
   }
 

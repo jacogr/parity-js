@@ -15,8 +15,13 @@ import CreateAccount from './CreateAccount';
 const STAGE_NAMES = ['creation type', 'create account', 'account information'];
 
 export default class NewAccount extends Component {
+  static contextTypes = {
+    api: PropTypes.object.isRequired
+  }
+
   static propTypes = {
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func,
+    onUpdate: PropTypes.func,
     visible: PropTypes.bool.isRequired
   }
 
@@ -88,7 +93,7 @@ export default class NewAccount extends Component {
             label='Create'
             disabled={ !this.state.canCreate }
             primary
-            onTouchTap={ this.onNext } />
+            onTouchTap={ this.onCreate } />
         ];
       case 2:
         return (
@@ -113,11 +118,25 @@ export default class NewAccount extends Component {
     });
   }
 
+  onCreate = () => {
+    const api = this.context.api;
+
+    api.personal
+      .newAccountFromPhrase(this.state.phrase, this.state.password)
+      .then((address) => api.personal.setAccountName(address, this.state.name))
+      .then(() => {
+        this.onNext();
+        this.props.onUpdate && this.props.onUpdate();
+      });
+  }
+
   onClose = () => {
     this.setState({
       stage: 0,
       canCreate: false
-    }, this.props.onClose);
+    }, () => {
+      this.props.onClose && this.props.onClose();
+    });
   }
 
   onChangeType = (value) => {
