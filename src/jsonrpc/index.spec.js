@@ -20,7 +20,7 @@ function verifyType (obj) {
   }
 }
 
-describe('ethereum-jsonrpc/interfaces', () => {
+describe('jsonrpc/interfaces', () => {
   Object.keys(interfaces).forEach((group) => {
     describe(group, () => {
       Object.keys(interfaces[group]).forEach((name) => {

@@ -1,4 +1,4 @@
-# ethereum-jsonrpc
+# jsonrpc
 
 JSON file of all ethereum's rpc methods supported by parity
 
