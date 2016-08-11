@@ -24,6 +24,18 @@ export default class Personal {
       .then(outAddress);
   }
 
+  newAccountFromPhrase (phrase, password) {
+    return this._transport
+      .execute('personal_newAccountFromPhrase')
+      .then(outAddress);
+  }
+
+  newAccountFromWallet (json, password) {
+    return this._transport
+      .execute('personal_newAccountFromWallet')
+      .then(outAddress);
+  }
+
   setAccountName (address, name) {
     return this._transport
       .execute('personal_setAccountName', inAddress(address), name);

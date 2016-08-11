@@ -83,7 +83,7 @@ export default {
     desc: 'Creates a secret phrase that can be associated with an account',
     params: [],
     returns: {
-      types: String,
+      type: String,
       desc: 'The secret phrase'
     }
   },

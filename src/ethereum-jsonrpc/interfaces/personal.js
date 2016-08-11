@@ -47,6 +47,42 @@ export default {
     }
   },
 
+  newAccountFromPhrase: {
+    desc: 'Creates a new account from a brainwallet passphrase',
+    params: [
+      {
+        type: String,
+        desc: 'Phrase'
+      },
+      {
+        type: String,
+        desc: 'Password'
+      }
+    ],
+    returns: {
+      type: Address,
+      desc: 'The created address'
+    }
+  },
+
+  newAccountFromWallet: {
+    desc: 'Creates a new account from a JSON import',
+    params: [
+      {
+        type: String,
+        desc: 'JSON'
+      },
+      {
+        type: String,
+        desc: 'Password'
+      }
+    ],
+    returns: {
+      type: Address,
+      desc: 'The created address'
+    }
+  },
+
   setAccountName: {
     desc: 'Sets a name for the account',
     params: [
