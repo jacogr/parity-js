@@ -5,7 +5,8 @@ import styles from './style.css';
 
 export default class IdentityIcon extends Component {
   static propTypes = {
-    address: PropTypes.string
+    address: PropTypes.string,
+    center: PropTypes.bool
   }
 
   state = {
@@ -14,14 +15,6 @@ export default class IdentityIcon extends Component {
 
   componentDidMount () {
     this.updateIcon(this.props.address);
-  }
-
-  componentWillReceiveProps (newProps) {
-    if (newProps.address === this.props.address) {
-      return;
-    }
-
-    this.updateIcon(newProps.address);
   }
 
   updateIcon (address) {
@@ -35,9 +28,13 @@ export default class IdentityIcon extends Component {
   }
 
   render () {
+    const className = `${styles.icon} ${this.props.center ? styles.center : styles.right}`;
+
     return (
-      <div className={ styles.icon }>
-        <img src={ this.state.iconsrc } />
+      <div className={ className }>
+        <img
+          src={ this.state.iconsrc }
+          value={ this.props.address } />
       </div>
     );
   }

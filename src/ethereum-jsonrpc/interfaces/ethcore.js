@@ -79,6 +79,15 @@ export default {
     }
   },
 
+  generateSecretPhrase: {
+    desc: 'Creates a secret phrase that can be associated with an account',
+    params: [],
+    returns: {
+      types: String,
+      desc: 'The secret phrase'
+    }
+  },
+
   minGasPrice: {
     desc: 'Returns currently set minimal gas price',
     params: [],
@@ -122,6 +131,20 @@ export default {
     returns: {
       type: String,
       desc: 'Node name'
+    }
+  },
+
+  phraseToAddress: {
+    desc: 'Converts a secret phrase into the corresponting address',
+    params: [
+      {
+        type: String,
+        desc: 'The secret'
+      }
+    ],
+    returns: {
+      type: Address,
+      desc: 'Corresponding address'
     }
   },
 

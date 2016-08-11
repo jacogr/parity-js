@@ -9,6 +9,10 @@ export default class CreationType extends Component {
     onChange: PropTypes.func.isRequired
   }
 
+  componentWillMount () {
+    this.props.onChange('fromNew');
+  }
+
   render () {
     return (
       <div>
@@ -33,7 +37,7 @@ export default class CreationType extends Component {
     );
   }
 
-  onChange = (value) => {
-    this.props.onChange(value);
+  onChange = (event) => {
+    this.props.onChange(event.target.value);
   }
 }

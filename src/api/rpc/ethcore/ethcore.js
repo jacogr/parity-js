@@ -1,5 +1,5 @@
 import { inAddress, inData, inNumber16 } from '../../format/input';
-import { outNumber, outPeers } from '../../format/output';
+import { outAddress, outNumber, outPeers } from '../../format/output';
 
 export default class Ethcore {
   constructor (transport) {
@@ -47,6 +47,11 @@ export default class Ethcore {
       .then(outNumber);
   }
 
+  generateSecretPhrase () {
+    return this._transport
+      .execute('ethcore_generateSecretPhrase');
+  }
+
   minGasPrice () {
     return this._transport
       .execute('ethcore_minGasPrice')
@@ -79,6 +84,12 @@ export default class Ethcore {
   nodeName () {
     return this._transport
       .execute('ethcore_nodeName');
+  }
+
+  phraseToAddress (phrase) {
+    return this._transport
+      .execute('ethcore_phraseToAddress', phrase)
+      .then(outAddress);
   }
 
   removeReservedPeer (encode) {

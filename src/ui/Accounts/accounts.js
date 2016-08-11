@@ -26,6 +26,7 @@ export default class Accounts extends Component {
     return (
       <div>
         <NewAccount
+          onClose={ this.onNewAccountClose }
           visible={ this.state.newDialog } />
         <Actions
           onFundAccount={ this.onFundAccountClick }
@@ -61,6 +62,11 @@ export default class Accounts extends Component {
 
   onNewAccountClick = () => {
     this.setState({ newDialog: !this.state.newDialog });
+  }
+
+  onNewAccountClose = () => {
+    this.onNewAccountClick();
+    this.retrieveAccounts();
   }
 
   onTransferClick = () => {

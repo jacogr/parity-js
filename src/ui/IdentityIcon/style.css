@@ -1,4 +1,11 @@
 .icon {
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
   float: right;
   text-align: right;
   margin: 1em 1em 0 0;

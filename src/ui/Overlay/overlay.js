@@ -10,16 +10,12 @@ const CONTENT_STYLE = { transform: 'translate(0px, 0px)' };
 
 export default class Overlay extends Component {
   static propTypes = {
-    actions: PropTypes.oneOf([
-      PropTypes.array, PropTypes.object
-    ]),
-    children: PropTypes.oneOf([
-      PropTypes.array, PropTypes.object
-    ]),
+    actions: PropTypes.node,
+    children: PropTypes.node,
     current: PropTypes.number,
     steps: PropTypes.array,
     title: React.PropTypes.oneOfType([
-      PropTypes.object, PropTypes.string
+      PropTypes.node, PropTypes.string
     ]),
     visible: PropTypes.bool.isRequired
   }
