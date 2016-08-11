@@ -17,7 +17,7 @@ export default class CreationType extends Component {
     return (
       <div>
         <div className={ styles.info }>
-          Select the creation type, either as a new account or importing from an existing resource
+          You can create an account either with a password or though an import from a pre-existing resource or export from another system
         </div>
         <RadioButtonGroup
           defaultSelected='fromNew'

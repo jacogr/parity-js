@@ -29,13 +29,14 @@ export default class CreateAccount extends Component {
 
   componentWillMount () {
     this.createIdentities();
+    this.props.onChange(false, {});
   }
 
   render () {
     return (
       <Form>
         <div className={ styles.info }>
-          Provide a name for the account, a strong password and your preferred identity icon
+          Provide a descriptive name for the account, a strong password and select your preferred identity icon to create the account
         </div>
         <TextField
           autoComplete='off'
@@ -92,7 +93,8 @@ export default class CreateAccount extends Component {
       <RadioButtonGroup
         valueSelected={ this.state.selectedAddress }
         className={ styles.selector }
-        name='identitySelector'>
+        name='identitySelector'
+        onChange={ this.onChangeIdentity }>
         { buttons }
       </RadioButtonGroup>
     );

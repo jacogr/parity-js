@@ -116,7 +116,7 @@ export default class NewAccount extends Component {
   onClose = () => {
     this.setState({
       stage: 0,
-      createType: ''
+      canCreate: false
     }, this.props.onClose);
   }
 
