@@ -11,8 +11,10 @@ import Overlay from '../Overlay';
 import AccountDetails from './AccountDetails';
 import CreationType from './CreationType';
 import CreateAccount from './CreateAccount';
+import ImportWallet from './ImportWallet';
 
 const STAGE_NAMES = ['creation type', 'create account', 'account information'];
+const STAGE_IMPORT = ['creation type', 'import wallet', 'account information'];
 
 export default class NewAccount extends Component {
   static contextTypes = {
@@ -30,8 +32,9 @@ export default class NewAccount extends Component {
     name: null,
     password: null,
     phrase: null,
+    json: null,
     canCreate: false,
-    createType: '',
+    createType: null,
     stage: 0
   }
 
@@ -40,7 +43,7 @@ export default class NewAccount extends Component {
       <Overlay
         actions={ this.renderDialogActions() }
         current={ this.state.stage }
-        steps={ STAGE_NAMES }
+        steps={ this.state.createType === 'fromNew' ? STAGE_NAMES : STAGE_IMPORT }
         visible={ this.props.visible }>
         { this.renderPage() }
       </Overlay>
@@ -56,10 +59,17 @@ export default class NewAccount extends Component {
         );
 
       case 1:
-        return (
-          <CreateAccount
-            onChange={ this.onChangeDetails } />
-        );
+        if (this.state.createType === 'fromNew') {
+          return (
+            <CreateAccount
+              onChange={ this.onChangeDetails } />
+          );
+        } else {
+          return (
+            <ImportWallet
+              onChange={ this.onChangeWallet } />
+          );
+        }
 
       case 2:
         return (
@@ -121,8 +131,18 @@ export default class NewAccount extends Component {
   onCreate = () => {
     const api = this.context.api;
 
-    api.personal
-      .newAccountFromPhrase(this.state.phrase, this.state.password)
+    if (this.state.createType === 'fromNew') {
+      return api.personal
+        .newAccountFromPhrase(this.state.phrase, this.state.password)
+        .then((address) => api.personal.setAccountName(address, this.state.name))
+        .then(() => {
+          this.onNext();
+          this.props.onUpdate && this.props.onUpdate();
+        });
+    }
+
+    return api.personal
+      .newAccountFromWallet(this.state.json, this.state.password)
       .then((address) => api.personal.setAccountName(address, this.state.name))
       .then(() => {
         this.onNext();
@@ -152,6 +172,15 @@ export default class NewAccount extends Component {
       address: address,
       password: password,
       phrase: phrase
+    });
+  }
+
+  onChangeWallet = (valid, { name, password, json }) => {
+    this.setState({
+      canCreate: valid,
+      name: name,
+      password: password,
+      json: json
     });
   }
 }

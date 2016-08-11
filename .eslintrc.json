@@ -6,7 +6,8 @@
     "node": true
   },
   "globals": {
-    "expect": true
+    "expect": true,
+    "FileReader": true
   },
   "rules": {
     "object-curly-spacing": ["error", "always"],

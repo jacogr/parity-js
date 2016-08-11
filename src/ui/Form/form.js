@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 
 import styles from './style.css';
 
-const HIDE_INPUT = { display: 'none' };
-
 export default class Form extends Component {
   static propTypes = {
     children: PropTypes.array
@@ -13,10 +11,12 @@ export default class Form extends Component {
     // HACK: hidden inputs to disable Chrome's autocomplete
     return (
       <form
-        autoComplete='new-password'
+        autoComplete='off'
         className={ styles.form }>
-        <input style={ HIDE_INPUT } type='text' name='fakeusernameremembered' />
-        <input style={ HIDE_INPUT } type='password' name='fakepasswordremembered' />
+        <div className={ styles.autofill }>
+          <input type='text' name='fakeusernameremembered' />
+          <input type='password' name='fakepasswordremembered' />
+        </div>
         { this.props.children }
       </form>
     );

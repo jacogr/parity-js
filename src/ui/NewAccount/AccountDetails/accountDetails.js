@@ -16,12 +16,17 @@ export default class RecoverAccount extends Component {
   }
 
   render () {
+    let info = 'The details for your newly created account is displayed below. ';
+    if (this.props.phrase) {
+      info += 'Take note of your recovery phrase and store it in a secure location, without it you cannot recover your account should you lose your password.';
+    }
+
     return (
       <Form>
         <IdentityIcon
           address={ this.props.address } />
         <div className={ styles.info }>
-          The details for your newly created account is displayed below. Take note of your recovery phrase and store it in a secure location, without it you cannot recover your account should you lose your password.
+           { info }
         </div>
         <FormWrap>
           <TextField
@@ -41,18 +46,28 @@ export default class RecoverAccount extends Component {
             fullWidth
             value={ this.props.address } />
         </FormWrap>
-        <FormWrap>
-          <TextField
-            autoComplete='off'
-            disabled
-            hintText='The account recovery phrase'
-            floatingLabelText='Recovery Phrase'
-            fullWidth
-            multiLine
-            rows={ 1 }
-            value={ this.props.phrase } />
-        </FormWrap>
+        { this.renderPhrase() }
       </Form>
+    );
+  }
+
+  renderPhrase () {
+    if (!this.props.phrase) {
+      return null;
+    }
+
+    return (
+      <FormWrap>
+        <TextField
+          autoComplete='off'
+          disabled
+          hintText='The account recovery phrase'
+          floatingLabelText='Recovery Phrase'
+          fullWidth
+          multiLine
+          rows={ 1 }
+          value={ this.props.phrase } />
+      </FormWrap>
     );
   }
 }

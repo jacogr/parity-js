@@ -27,3 +27,7 @@
   text-align: center;
   cursor: pointer;
 }
+
+.upload {
+  text-align: right;
+}
